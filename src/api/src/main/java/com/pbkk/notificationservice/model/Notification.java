@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,14 +15,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "notifications")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt","updatedAt"}, allowGetters = true)
+@JsonIgnoreProperties(value = {"id","entityId","entityType","userId","createdAt","updatedAt"}, allowGetters = true)
 public class Notification {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank
+	private Integer entityId;
+	
+	private String entityType;
+	
 	private Integer userId;
 	
 	@NotBlank
@@ -46,6 +50,22 @@ public class Notification {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getEntityId() {
+		return entityId;
+	}
+
+	public void setEntityId(Integer entityId) {
+		this.entityId = entityId;
+	}
+
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
 	}
 
 	public Integer getUserId() {
