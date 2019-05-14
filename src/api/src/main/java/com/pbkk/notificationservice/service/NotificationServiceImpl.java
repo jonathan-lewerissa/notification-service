@@ -15,14 +15,13 @@ public class NotificationServiceImpl implements NotificationService {
 	NotificationRepository notificationRepository;
 	
 	@Override
-	public List<Notification> getUserNotifications(Integer userId) {
+	public List<Notification> getUserNotifications(Long userId) {
 		return notificationRepository.findByUserId(userId);
 	}
 
 	@Override
 	public Notification createNotification(Notification notification) {
 		Notification savedNotification = notificationRepository.save(notification);
-		
 		return savedNotification;
 	}
 

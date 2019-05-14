@@ -1,6 +1,7 @@
 package com.pbkk.notificationservice.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -12,22 +13,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pbkk.notificationservice.exception.ResourceNotFoundException;
 import com.pbkk.notificationservice.model.Notification;
+import com.pbkk.notificationservice.model.NotificationBridge;
+import com.pbkk.notificationservice.model.User;
+import com.pbkk.notificationservice.repository.UserRepository;
 import com.pbkk.notificationservice.service.NotificationService;
+import com.pbkk.notificationservice.service.UserService;
 
 @RestController
 @RequestMapping("/api")
 public class NotificationController {
 	@Autowired
-	NotificationService notificationService;
+	private NotificationService notificationService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("/notification/user/{userId}")
-	public List<Notification> getNotifications(@PathVariable Integer userId) {
+	public List<Notification> getAllNotificationsByUserId(@PathVariable Long userId) {
 		return notificationService.getUserNotifications(userId);
 	}
 	
 	@PostMapping("/notification")
-	public Notification createNotification(@Valid @RequestBody Notification notification) {
-		return notificationService.createNotification(notification);
+	public Notification createNotification(@Valid @RequestBody NotificationBridge notification) {
+		Notification toSave = new Notification();
+		
+		toSave.setSender(notification.getSender());
+		toSave.setType(notification.getType());
+		toSave.setMessage(notification.getMessage());
+		toSave.setCallbackUrl(notification.getCallbackUrl());
+		toSave.setUser(userService.getSingleUser(notification.getUserId()));
+		
+		return notificationService.createNotification(toSave);
+	}
+	
+	@GetMapping("/user/{userId}")
+	public User getSingleUser(@PathVariable Long userId) {
+		return userService.getSingleUser(userId);
+	}
+	
+	@PostMapping("/user")
+	public User createUser(@RequestBody User user) {
+		return userService.registerUser(user);
 	}
 }
