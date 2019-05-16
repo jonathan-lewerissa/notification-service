@@ -86,6 +86,12 @@ public class Notification extends AuditModel {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "Notification [id=" + id + ", sender=" + sender + ", type=" + type + ", message=" + message
+				+ ", callbackUrl=" + callbackUrl + ", user=" + user + "]";
+	}
 	
 	
 }

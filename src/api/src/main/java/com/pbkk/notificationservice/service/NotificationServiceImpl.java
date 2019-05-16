@@ -14,6 +14,9 @@ public class NotificationServiceImpl implements NotificationService {
 	@Autowired
 	NotificationRepository notificationRepository;
 	
+	@Autowired
+	EmailService emailService;
+	
 	@Override
 	public List<Notification> getUserNotifications(Long userId) {
 		return notificationRepository.findByUserId(userId);
@@ -22,6 +25,8 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	public Notification createNotification(Notification notification) {
 		Notification savedNotification = notificationRepository.save(notification);
+		emailService.sendEmail("joel.sembilan8@gmail.com", "Test", notification.toString());
+		
 		return savedNotification;
 	}
 

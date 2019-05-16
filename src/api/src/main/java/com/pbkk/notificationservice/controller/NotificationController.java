@@ -1,7 +1,6 @@
 package com.pbkk.notificationservice.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -13,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pbkk.notificationservice.exception.ResourceNotFoundException;
 import com.pbkk.notificationservice.model.Notification;
 import com.pbkk.notificationservice.model.NotificationBridge;
 import com.pbkk.notificationservice.model.User;
-import com.pbkk.notificationservice.repository.UserRepository;
 import com.pbkk.notificationservice.service.NotificationService;
 import com.pbkk.notificationservice.service.UserService;
 
