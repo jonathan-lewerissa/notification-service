@@ -27,12 +27,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.quickstart.fcm.R;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -114,6 +122,37 @@ public class MainActivity extends AppCompatActivity {
                                 String msg = getString(R.string.msg_token_fmt, token);
                                 Log.d(TAG, msg);
                                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+                                JSONObject body = new JSONObject();
+                                try {
+                                    body.put("user_id",102);
+                                    body.put("fcm_token",token);
+                                } catch (Exception e){
+                                    Log.d("Error",e.toString());
+                                }
+
+                                JsonObjectRequest objectRequest = new JsonObjectRequest(
+                                        Request.Method.POST,
+                                        "https://notification.jonathanrl.com/api/user",
+                                        body,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                Log.d("Json Response", response.toString());
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                Log.d("Json Error Response", error.toString());
+                                            }
+                                        }
+                                );
+
+                                requestQueue.add(objectRequest);
+
                             }
                         });
                 // [END retrieve_current_token]
