@@ -51,7 +51,7 @@ public class ApiController {
 	}
 	
 	@PostMapping("/user")
-	public User createUser(@RequestBody User user) {
+	public User registerUser(@RequestBody User user) {
 		return userService.registerUser(user);
 	}
 }

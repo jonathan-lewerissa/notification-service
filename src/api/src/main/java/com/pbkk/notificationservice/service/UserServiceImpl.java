@@ -28,7 +28,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User registerUser(User user) {
-		return userRepository.save(user);
+		User userToSave = userRepository.findById(user.getId()).orElse(null);
+		
+		if(userToSave == null) {
+			userToSave = user;
+		} else {
+			userToSave.setId(user.getId()==null ? userToSave.getId() : user.getId());
+			userToSave.setEmail(user.getEmail()==null ? userToSave.getEmail() : user.getEmail());
+			userToSave.setFcmToken(user.getFcmToken()==null ? userToSave.getFcmToken() : user.getFcmToken());
+		}
+		
+		return userRepository.save(userToSave);
 	}
 
 }
