@@ -2,9 +2,8 @@ package com.pbkk.notificationservice.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +17,7 @@ import com.pbkk.notificationservice.model.User;
 import com.pbkk.notificationservice.service.NotificationService;
 import com.pbkk.notificationservice.service.UserService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class ApiController {
