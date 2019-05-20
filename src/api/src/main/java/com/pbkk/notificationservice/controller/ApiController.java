@@ -20,7 +20,7 @@ import com.pbkk.notificationservice.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-public class NotificationController {
+public class ApiController {
 	@Autowired
 	private NotificationService notificationService;
 	
