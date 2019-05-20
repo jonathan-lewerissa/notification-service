@@ -28,11 +28,18 @@ public class Notification extends AuditModel {
 	private String type;
 	
 	@NotBlank
+	@JsonProperty("title")
+	private String title;
+	
+	@NotBlank
 	@JsonProperty("message")
 	private String message;
 	
 	@JsonProperty("callback_url")
 	private String callbackUrl;
+	
+	@JsonProperty("isEmail")
+	private Boolean isEmail;
 	
 	@ManyToOne
 	@JoinColumn
@@ -92,6 +99,21 @@ public class Notification extends AuditModel {
 		return "Notification [id=" + id + ", sender=" + sender + ", type=" + type + ", message=" + message
 				+ ", callbackUrl=" + callbackUrl + ", user=" + user + "]";
 	}
-	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Boolean getIsEmail() {
+		return isEmail;
+	}
+
+	public void setIsEmail(Boolean isEmail) {
+		this.isEmail = isEmail;
+	}
 	
 }

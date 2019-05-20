@@ -2,6 +2,8 @@ package com.pbkk.notificationservice.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User registerUser(User user) {
+	public User registerUser(@Valid User user) {
 		User userToSave = userRepository.findById(user.getId()).orElse(null);
 		
 		if(userToSave == null) {

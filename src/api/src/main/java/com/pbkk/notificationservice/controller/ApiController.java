@@ -33,16 +33,20 @@ public class ApiController {
 	}
 	
 	@PostMapping("/notification")
-	public Notification createNotification(@Valid @RequestBody NotificationBridge notification) {
+	public Notification createNotification(@RequestBody NotificationBridge notification) {
 		Notification toSave = new Notification();
+		
+		User user = userService.getSingleUser(notification.getUserId());
 		
 		toSave.setSender(notification.getSender());
 		toSave.setType(notification.getType());
 		toSave.setMessage(notification.getMessage());
 		toSave.setCallbackUrl(notification.getCallbackUrl());
-		toSave.setUser(userService.getSingleUser(notification.getUserId()));
+		toSave.setIsEmail(notification.getIsEmail());
+		toSave.setTitle(notification.getTitle());
+		toSave.setUser(user);
 		
-		return notificationService.createNotification(toSave, notification.getIsEmail());
+		return notificationService.createNotification(user, toSave, notification.getIsEmail());
 	}
 	
 	@GetMapping("/user/{userId}")

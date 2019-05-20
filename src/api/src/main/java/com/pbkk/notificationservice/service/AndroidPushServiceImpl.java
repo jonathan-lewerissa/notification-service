@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class AndroidPushServiceImpl implements AndroidPushService {
 
-	private static final String FIREBASE_SERVER_KEY = "";
+	private static final String FIREBASE_SERVER_KEY = "AIzaSyAVHDB-EQWT1g6_SpsjXtd4c4lIa_-oW7U";
 	private static final String FIREBASE_API_URL = "https://fcm.googleapis.com/fcm/send";
 	
 	@Async

@@ -1,6 +1,7 @@
 package com.pbkk.notificationservice.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,6 +21,7 @@ public class User extends AuditModel {
 	private String fcmToken;
 	
 	@JsonProperty("email")
+	@Email
 	private String email;
 
 	public Long getId() {

@@ -67,8 +67,9 @@
     		<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
-		  <groupId>com.google.code.gson</groupId>
-		  <artifactId>gson</artifactId>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20180813</version>
 		</dependency>
 	</dependencies>
 

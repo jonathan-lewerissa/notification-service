@@ -13,6 +13,9 @@ public class NotificationBridge {
 	@JsonProperty("type")
 	private String type;
 	
+	@JsonProperty("title")
+	private String title;
+	
 	@JsonProperty("message")
 	private String message;
 	
@@ -61,5 +64,13 @@ public class NotificationBridge {
 	public void setIsEmail(Boolean isEmail) {
 		this.isEmail = isEmail;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	
 	
 }
