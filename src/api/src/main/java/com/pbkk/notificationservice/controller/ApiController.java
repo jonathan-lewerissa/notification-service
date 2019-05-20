@@ -20,7 +20,7 @@ import com.pbkk.notificationservice.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-public class NotificationController {
+public class ApiController {
 	@Autowired
 	private NotificationService notificationService;
 	
@@ -51,7 +51,7 @@ public class NotificationController {
 	}
 	
 	@PostMapping("/user")
-	public User createUser(@RequestBody User user) {
+	public User registerUser(@RequestBody User user) {
 		return userService.registerUser(user);
 	}
 }
