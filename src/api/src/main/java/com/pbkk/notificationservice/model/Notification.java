@@ -1,110 +1,97 @@
 package com.pbkk.notificationservice.model;
 
-import java.util.Date;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
+@SuppressWarnings("serial")
+@Data
 @Entity
 @Table(name = "notifications")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"id","entityId","entityType","userId","createdAt","updatedAt"}, allowGetters = true)
-public class Notification {
+public class Notification extends AuditModel {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	
-	private Integer entityId;
-	
-	private String entityType;
-	
-	private Integer userId;
+	private Long id;
 	
 	@NotBlank
-	private String notificationType;
+	@JsonProperty("sender")
+	private String sender;
 	
 	@NotBlank
-	private String notificationMessage;
+	@JsonProperty("type")
+	private String type;
 	
-	@Column(nullable = false, updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
-	private Date createdAt;
+	@NotBlank
+	@JsonProperty("message")
+	private String message;
 	
-	@Column(nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
-	private Date updatedAt;
+	@JsonProperty("callback_url")
+	private String callbackUrl;
+	
+	@ManyToOne
+	@JoinColumn
+	@JsonIgnore	
+	private User user;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Integer getEntityId() {
-		return entityId;
+	public String getSender() {
+		return sender;
 	}
 
-	public void setEntityId(Integer entityId) {
-		this.entityId = entityId;
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
 
-	public String getEntityType() {
-		return entityType;
+	public String getType() {
+		return type;
 	}
 
-	public void setEntityType(String entityType) {
-		this.entityType = entityType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public String getNotificationType() {
-		return notificationType;
+	public String getCallbackUrl() {
+		return callbackUrl;
 	}
 
-	public void setNotificationType(String notificationType) {
-		this.notificationType = notificationType;
+	public void setCallbackUrl(String callbackUrl) {
+		this.callbackUrl = callbackUrl;
 	}
 
-	public String getNotificationMessage() {
-		return notificationMessage;
+	public User getUser() {
+		return user;
 	}
 
-	public void setNotificationMessage(String notificationMessage) {
-		this.notificationMessage = notificationMessage;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	@Override
+	public String toString() {
+		return "Notification [id=" + id + ", sender=" + sender + ", type=" + type + ", message=" + message
+				+ ", callbackUrl=" + callbackUrl + ", user=" + user + "]";
 	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+	
+	
 }

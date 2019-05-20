@@ -9,5 +9,5 @@ import com.pbkk.notificationservice.model.Notification;
 
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Long>{
-	List<Notification> findByUserId(Integer userId);
+	List<Notification> findByUserId(Long userId);
 }
