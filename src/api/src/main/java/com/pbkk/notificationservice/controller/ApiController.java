@@ -42,7 +42,7 @@ public class ApiController {
 		toSave.setCallbackUrl(notification.getCallbackUrl());
 		toSave.setUser(userService.getSingleUser(notification.getUserId()));
 		
-		return notificationService.createNotification(toSave);
+		return notificationService.createNotification(toSave, notification.getIsEmail());
 	}
 	
 	@GetMapping("/user/{userId}")

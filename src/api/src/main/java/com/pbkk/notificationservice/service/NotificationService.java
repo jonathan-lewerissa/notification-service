@@ -6,5 +6,5 @@ import com.pbkk.notificationservice.model.Notification;
 
 public interface NotificationService {
 	List<Notification> getUserNotifications(Long userId);
-	Notification createNotification(Notification notification);
+	Notification createNotification(Notification notification, Boolean isEmail);
 }
