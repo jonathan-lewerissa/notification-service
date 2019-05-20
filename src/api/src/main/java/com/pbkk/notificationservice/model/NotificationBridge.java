@@ -22,6 +22,9 @@ public class NotificationBridge {
 	@JsonProperty("user_id")
 	private Long userId;
 	
+	@JsonProperty("isEmail")
+	private Boolean isEmail;
+	
 	public String getSender() {
 		return sender;
 	}
@@ -52,6 +55,11 @@ public class NotificationBridge {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	
+	public Boolean getIsEmail() {
+		return isEmail;
+	}
+	public void setIsEmail(Boolean isEmail) {
+		this.isEmail = isEmail;
+	}
 	
 }

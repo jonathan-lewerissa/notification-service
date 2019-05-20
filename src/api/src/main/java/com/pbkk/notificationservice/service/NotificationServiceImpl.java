@@ -1,7 +1,6 @@
 package com.pbkk.notificationservice.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +23,10 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public Notification createNotification(Notification notification, Optional<Boolean> isEmail) {
+	public Notification createNotification(Notification notification, Boolean isEmail) {
 		Notification savedNotification = notificationRepository.save(notification);
-	    if (isEmail.isPresent()) {
+	    if (isEmail) {
+	    	// Fetch email user
 	    	emailService.sendEmail("joel.sembilan8@gmail.com", "Test", notification.toString());
 	    }
 		return savedNotification;
