@@ -21,10 +21,12 @@ import android.app.NotificationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -101,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button logTokenButton = findViewById(R.id.logTokenButton);
+        final TextView numberinput = findViewById(R.id.userIdInput);
+        final TextView emailInput = findViewById(R.id.emailInput);
         logTokenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,8 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
                                 JSONObject body = new JSONObject();
                                 try {
-                                    body.put("user_id",102);
+                                    body.put("user_id",numberinput.getText().toString());
                                     body.put("fcm_token",token);
+                                    body.put("email",emailInput.getText().toString());
                                 } catch (Exception e){
                                     Log.d("Error",e.toString());
                                 }
